@@ -5,6 +5,7 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Select, SelectItem } from "../ui/select";
 import { Pagination } from "../ui/pagination";
+import Link from "next/link";
 
 const doctors = [
   {
@@ -49,7 +50,7 @@ const DoctorList = () => {
             <SelectItem value="Availability Status">Availability Status</SelectItem>
           </Select>
         </div>
-        <Button className="bg-blue-500 text-white hover:bg-blue-600">Add New Doctor</Button>
+        <Link className="bg-blue-500 text-white hover:bg-blue-600" href={"/adddoctor"}>Add New Doctor</Link>
       </div>
       <div className="grid grid-cols-2 gap-4">
         {paginatedDoctors.map((doctor, index) => (
