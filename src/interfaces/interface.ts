@@ -9,5 +9,5 @@ export interface Doctor {
   contactNumber: string;
   email: string;
   yoe: string;
-  schedule: Schedule[];
+  schedule: string;
 }
