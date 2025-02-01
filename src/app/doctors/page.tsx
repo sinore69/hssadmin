@@ -3,16 +3,17 @@ import { useState } from "react";
 import { Card, CardContent } from "../components/ui/card";
 import { Button } from "../components/ui/button";
 import { Schedule, Doctor } from "@/interfaces/interface";
-import { test } from "@/lib/test";
+import { addNewDoctor } from "@/functions/addnewdoctor";
+// import { test } from "@/lib/test";
 
 export default function DoctorManagement() {
   const [doctors, setDoctors] = useState<Doctor[]>([]);
-  const [formData, setFormData] = useState<Omit<Doctor, "id">>({
+  const [formData, setFormData] = useState<Doctor>({
     name: "",
     specialization: "",
     contactNumber: "",
     email: "",
-    experience: "",
+    yoe: "",
     schedule: [],
   });
   const [scheduleEntry, setScheduleEntry] = useState<Schedule>({
@@ -41,23 +42,24 @@ export default function DoctorManagement() {
   };
 
   const addDoctor = () => {
-    setDoctors((prevDoctors) => [
-      ...prevDoctors,
-      { id: Date.now(), ...formData },
-    ]);
+    // setDoctors((prevDoctors) => [
+    //   ...prevDoctors,
+    //   { id: Date.now(), ...formData },
+    // ]);
     setFormData({
-      name: "",
-      specialization: "",
-      contactNumber: "",
-      email: "",
-      experience: "",
+      name: "name name",
+      specialization: "cardio",
+      contactNumber: "9191919191",
+      email: "a@gmail.com",
+      yoe: "15",
       schedule: [],
     });
+    addNewDoctor(formData);
   };
 
-  const removeDoctor = (id: number) => {
+  const removeDoctor = (contactNumber: string) => {
     setDoctors((prevDoctors) =>
-      prevDoctors.filter((doctor) => doctor.id !== id)
+      prevDoctors.filter((doctor) => doctor.contactNumber !== contactNumber)
     );
   };
 
@@ -71,7 +73,7 @@ export default function DoctorManagement() {
   return (
     <div className="p-8 bg-gray-50 min-h-screen">
       <h1 className="text-2xl font-bold mb-6">Doctor Management</h1>
-      <button onClick={() => test()}>add doctor</button>
+      {/* <button onClick={() => test()}>add doctor</button> */}
       <div className="bg-white p-6 shadow-xl rounded-xl max-w-md">
         <h2 className="text-xl font-semibold mb-4">Add Doctor Information</h2>
         <form
@@ -84,7 +86,7 @@ export default function DoctorManagement() {
           <input
             type="text"
             name="name"
-            value={formData.name}
+            value={formData.name!}
             onChange={handleInputChange}
             placeholder="Doctor Name"
             className="w-full p-2 border rounded-lg"
@@ -93,7 +95,7 @@ export default function DoctorManagement() {
           <input
             type="text"
             name="specialization"
-            value={formData.specialization}
+            value={formData.specialization!}
             onChange={handleInputChange}
             placeholder="Specialization"
             className="w-full p-2 border rounded-lg"
@@ -102,7 +104,7 @@ export default function DoctorManagement() {
           <input
             type="tel"
             name="contactNumber"
-            value={formData.contactNumber}
+            value={formData.contactNumber!}
             onChange={handleInputChange}
             placeholder="Contact Number"
             className="w-full p-2 border rounded-lg"
@@ -111,7 +113,7 @@ export default function DoctorManagement() {
           <input
             type="email"
             name="email"
-            value={formData.email}
+            value={formData.email!}
             onChange={handleInputChange}
             placeholder="Email Address"
             className="w-full p-2 border rounded-lg"
@@ -119,19 +121,22 @@ export default function DoctorManagement() {
           />
           <input
             type="text"
-            name="experience"
-            value={formData.experience}
+            name="yoe"
+            value={formData.yoe!}
             onChange={handleInputChange}
             placeholder="Years of Experience"
             className="w-full p-2 border rounded-lg"
             required
           />
+          <Button type="submit" className="w-full">
+            Add Doctor
+          </Button>
           <div className="space-y-2">
             <h3 className="font-semibold">Schedule</h3>
             <input
               type="text"
               name="day"
-              value={scheduleEntry.day}
+              value={scheduleEntry.day!}
               onChange={handleScheduleChange}
               placeholder="Day (e.g., Monday)"
               className="w-full p-2 border rounded-lg"
@@ -139,7 +144,7 @@ export default function DoctorManagement() {
             <input
               type="text"
               name="time"
-              value={scheduleEntry.time}
+              value={scheduleEntry.time!}
               onChange={handleScheduleChange}
               placeholder="Time (e.g., 9:00 AM - 1:00 PM)"
               className="w-full p-2 border rounded-lg"
@@ -148,16 +153,16 @@ export default function DoctorManagement() {
               Add Schedule Entry
             </Button>
           </div>
-          <Button type="submit" className="w-full">
-            Add Doctor
-          </Button>
         </form>
       </div>
       <div className="mt-8">
         <h2 className="text-xl font-semibold mb-4">Doctor List</h2>
         <div className="grid grid-cols-1 gap-4">
           {doctors.map((doctor) => (
-            <Card key={doctor.id} className="border bg-white p-4 rounded-lg">
+            <Card
+              key={doctor.contactNumber}
+              className="border bg-white p-4 rounded-lg"
+            >
               <CardContent>
                 <p>
                   <strong>Name:</strong> {doctor.name}
@@ -172,7 +177,7 @@ export default function DoctorManagement() {
                   <strong>Email:</strong> {doctor.email}
                 </p>
                 <p>
-                  <strong>Experience:</strong> {doctor.experience} years
+                  <strong>Yoe:</strong> {doctor.yoe} years
                 </p>
                 <div>
                   <strong>Schedule:</strong>
@@ -185,7 +190,7 @@ export default function DoctorManagement() {
                   </ul>
                 </div>
                 <Button
-                  onClick={() => removeDoctor(doctor.id)}
+                  onClick={() => removeDoctor(doctor.contactNumber!)}
                   className="mt-2 bg-red-500 hover:bg-red-600 text-white"
                 >
                   Remove Doctor
