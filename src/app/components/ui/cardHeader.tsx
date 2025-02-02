@@ -7,8 +7,8 @@ export const CardHeader: React.FC<{
   ) => (event: React.ChangeEvent<HTMLInputElement>) => void;
 }> = ({ name, specialization, handleChange }) => (
   
-  <div className="flex items-center gap-4 p-4 border-b border-gray-200">
-    <div>
+  <div className="flex items-center gap-4 p-4">
+    <div className="flex flex-col gap-2">
       <input
         type="text"
         className="text-xl font-semibold border-b border-gray-200 focus:outline-none w-full"

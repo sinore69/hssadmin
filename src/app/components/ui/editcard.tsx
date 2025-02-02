@@ -34,7 +34,7 @@ const EditableDoctorCard: React.FC<{
   const [spinner, setSpinner] = useState<boolean>(false);
 
   return (
-    <div className="p-4 w-96 shadow-lg border rounded-lg">
+    <div className="p-4 shadow-lg border rounded-lg w-full">
       <CardHeader
         name={editableDoctor.name}
         specialization={editableDoctor.specialization}

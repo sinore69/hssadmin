@@ -23,25 +23,35 @@ function DoctorCard(props: { doctor: Doctor }) {
                 <div className="flex flex-row">
                   <div className="w-16 h-16 bg-gray-300 rounded-full mr-2"></div>
                   <div className="">
-                    <h2 className="text-lg font-semibold">{editableDoctor.name}</h2>
-                    <p className="text-gray-500">{editableDoctor.specialization}</p>
+                    <h2 className="text-lg font-semibold">
+                      {editableDoctor.name}
+                    </h2>
+                    <p className="text-gray-500">
+                      {editableDoctor.specialization}
+                    </p>
                   </div>
                 </div>
                 <DeleteIcon data={editableDoctor} />
               </div>
-              <div className="mt-4">
-                <p className="text-gray-700">🕒 {editableDoctor.schedule}</p>
-              </div>
-              <div className="mt-4 flex space-x-4">
-                {/* Use doctor.yoe and doctor.availability */}
-                <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">
-                  {`${doctor.yoe}+ Years of Experience`}
-                </span>
-              </div>
-              <div className="flex justify-between mt-4">
-                <Button variant="outline" onClick={toggle}>
-                  View Profile
-                </Button>
+              <div className="flex flex-row justify-between">
+                <div className="">
+                  <div className="mt-4">
+                    <p className="text-gray-700">
+                      🕒 {editableDoctor.schedule}
+                    </p>
+                  </div>
+                  <div className="mt-4 flex space-x-4">
+                    {/* Use doctor.yoe and doctor.availability */}
+                    <span className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm">
+                      {`${doctor.yoe}+ Years of Experience`}
+                    </span>
+                  </div>
+                </div>
+                <div className="flex justify-between mt-8">
+                  <Button variant="outline" onClick={toggle}>
+                    View Profile
+                  </Button>
+                </div>
               </div>
             </CardContent>
           ) : (
