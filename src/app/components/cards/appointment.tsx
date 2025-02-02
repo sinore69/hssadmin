@@ -2,7 +2,7 @@ import React from 'react';
 
 const Appointments = () => {
   return (
-    <div className="p-8 bg-gray-100">
+    <div className="p-8 bg-gray-100 rounded-lg">
       <h1 className="text-xl font-bold mb-4">Upcoming Appointments</h1>
 
       <div className="mb-4">

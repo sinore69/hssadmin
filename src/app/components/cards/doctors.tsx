@@ -4,9 +4,9 @@ import { Input } from "../ui/input";
 import { Select, SelectItem } from "../ui/select";
 import Link from "next/link";
 import { Doctor } from "@/interfaces/interface";
-import { getDoctos } from "@/functions/getdoctors";
 import Doctorcard from "../ui/doctorcard";
 import LoadingSpinner from "../ui/spinner";
+import { getDoctors } from "@/functions/getDoctors";
 
 const DoctorList = () => {
   const [doctors, setDoctors] = useState<Doctor[]>([
@@ -32,7 +32,7 @@ const DoctorList = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response: Doctor[] = await getDoctos();
+        const response: Doctor[] = await getDoctors();
         if (!response) {
           throw new Error("Network response was not ok");
         }
@@ -48,7 +48,7 @@ const DoctorList = () => {
     fetchData(); 
   }, []); 
     return (
-    <div className="p-8 bg-gray-100">
+    <div className="p-8 bg-gray-100 rounded-lg">
       <div className="flex justify-between items-center mb-6">
         <Input placeholder="Search doctors..." className="w-1/3" />
         <div className="flex space-x-4">
@@ -62,10 +62,10 @@ const DoctorList = () => {
           </Select>
         </div>
         <Link
-          className="bg-blue-500 text-white hover:bg-blue-600"
+          className="bg-blue-500 text-white hover:bg-blue-600 rounded-md p-1 font-semibold text-center"
           href={"/doctors"}
         >
-          Add New Doctor
+          Add Doctor
         </Link>
       </div>
       {loading ? (

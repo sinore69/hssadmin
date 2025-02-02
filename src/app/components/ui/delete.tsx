@@ -2,17 +2,15 @@
 import { deleteDoctor } from "@/functions/deleteDoctor";
 import { Doctor } from "@/interfaces/interface";
 import { FaTrash } from "react-icons/fa";
-import { useRouter } from "next/navigation";
+  
 const DeleteIcon = (props: { data: Doctor }) => {
   const { data } = props;
-  const router = useRouter();
   return (
     <div
-      className="group cursor-pointer"
+      className="group cursor-pointer hover:shadow-lg rounded-lg"
       onClick={() => {
         deleteDoctor(data);
-        console.log("first");
-        router.refresh();
+        window.location.reload();
       }}
     >
       <FaTrash className="text-gray-600 group-hover:text-red-500 transition-colors duration-300 h-7 w-7 p-1" />
