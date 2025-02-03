@@ -1,39 +1,134 @@
-import React from 'react';
+"use client";
+import React, { useEffect, useState } from "react";
+import { Card, CardContent } from "../ui/card";
+import { getAppointments } from "@/functions/getAppointments";
+import LoadingSpinner from "../ui/spinner";
 
-const Appointments = () => {
+interface Appointment {
+  id: number;
+  date: string;
+  startTime: string;
+  endTime: string;
+  status: string;
+  userId: {
+    id: number;
+    name: string | null;
+    email: string;
+    phoneNumber: string;
+  };
+  doctorId: number;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface DoctorAppointment {
+  id: number;
+  name: string;
+  specialization: string;
+  Appointments: Appointment[];
+}
+
+interface Department {
+  deptId: number;
+  deptName: string;
+  Doctors: DoctorAppointment[];
+}
+
+interface Hospital {
+  hospital: {
+    hospitalId: number;
+    hospitalName: string;
+    Departments: Department[];
+  };
+}
+
+const AppointmentsCard: React.FC<{}> = () => {
+  const [hospital, setHospital] = useState<Hospital["hospital"]>();
+
+  const appointmentsList = hospital?.Departments?.flatMap((department) =>
+    department.Doctors.flatMap((doctor) =>
+      doctor.Appointments.map((appointment) => ({
+        doctorName: doctor.name,
+        specialization: doctor.specialization,
+        patientName: appointment.userId.name || "N/A",
+        patientEmail: appointment.userId.email,
+        date: appointment.date,
+        startTime: appointment.startTime,
+        endTime: appointment.endTime,
+        status: appointment.status,
+      }))
+    )
+  );
+
+  const [loading, setLoading] = useState<boolean>(true);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const response: Hospital = await getAppointments(1);
+        if (!response) {
+          throw new Error("Network response was not ok");
+        }
+        setHospital(response.hospital);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
-    <div className="p-8 bg-gray-100 rounded-lg">
-      <h1 className="text-xl font-bold mb-4">Upcoming Appointments</h1>
-
-      <div className="mb-4">
-        <div className="flex justify-between items-center mb-2">
-          <div>
-            <h2 className="font-semibold">Rahul Sharma - General Checkup</h2>
-            <p className="text-sm text-gray-600">Dr. Amit Kumar</p>
-          </div>
-          <div className="text-sm text-gray-600">○ Today, 10:00 AM</div>
-        </div>
-        <div className="flex space-x-2">
-          <button className="text-blue-500 hover:text-blue-700">Edit</button>
-          <button className="text-red-500 hover:text-red-700">Cancel</button>
-        </div>
-      </div>
-
-      <div className="mb-4">
-        <div className="flex justify-between items-center mb-2">
-          <div>
-            <h2 className="font-semibold">Priya Patel - Dental Consultation</h2>
-            <p className="text-sm text-gray-600">Dr. Meera Shah</p>
-          </div>
-          <div className="text-sm text-gray-600">○ Tomorrow, 11:30 AM</div>
-        </div>
-        <div className="flex space-x-2">
-          <button className="text-blue-500 hover:text-blue-700">Edit</button>
-          <button className="text-red-500 hover:text-red-700">Cancel</button>
-        </div>
+    <div className="bg-gray-100 rounded-lg">
+      <h2 className="text-xl font-bold pl-5 pt-4">Appointment Details</h2>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+        {loading ? (
+          <LoadingSpinner />
+        ) : (
+          <>
+            {appointmentsList?.length! > 0 ? (
+              appointmentsList?.map((appointment, index) => (
+                <Card key={index} className="border rounded-xl shadow-lg p-4">
+                  <CardContent>
+                    <p className="text-sm">
+                      Doctor:{" "}
+                      <span className="font-medium">
+                        {appointment.doctorName}
+                      </span>
+                    </p>
+                    <p className="text-sm">
+                      Specialization: {appointment.specialization}
+                    </p>
+                    <p className="text-sm">
+                      Patient: {appointment.patientName}
+                    </p>
+                    <p className="text-sm">Email: {appointment.patientEmail}</p>
+                    <p className="text-sm">
+                      Date: {new Date(appointment.date).toLocaleDateString()}
+                    </p>
+                    <p className="text-sm">
+                      Time: {appointment.startTime} - {appointment.endTime}
+                    </p>
+                    <p className="text-sm">
+                      Status:{" "}
+                      <span className="text-green-600 font-medium">
+                        {appointment.status}
+                      </span>
+                    </p>
+                  </CardContent>
+                </Card>
+              ))
+            ) : (
+              <p className="text-center text-gray-500">
+                No Appointments Available
+              </p>
+            )}
+          </>
+        )}
       </div>
     </div>
   );
 };
 
-export default Appointments;
+export default AppointmentsCard;
