@@ -42,7 +42,7 @@ interface Hospital {
   };
 }
 
-const AppointmentsCard: React.FC<{}> = () => {
+const AppointmentsCard: React.FC = () => {
   const [hospital, setHospital] = useState<Hospital["hospital"]>();
 
   const appointmentsList = hospital?.Departments?.flatMap((department) =>
@@ -87,7 +87,7 @@ const AppointmentsCard: React.FC<{}> = () => {
           <LoadingSpinner />
         ) : (
           <>
-            {appointmentsList?.length! > 0 ? (
+            {appointmentsList && appointmentsList?.length > 0 ? (
               appointmentsList?.map((appointment, index) => (
                 <Card key={index} className="border rounded-xl shadow-lg p-4">
                   <CardContent>

@@ -2,12 +2,12 @@
 import React, { useState } from "react";
 
 const General = () => {
-  const [hospitalName, setHospitalName] = useState("Hindsvaasthseva");
+  // const [hospitalName, setHospitalName] = useState("Hindsvaasthseva");
   const [contactEmail, setContactEmail] = useState(
     "contact@hindsvaasthseva.com"
   );
   const [contactNumber, setContactNumber] = useState("+911234567890");
-  const [timeZone, setTimeZone] = useState("Asia/Kolkata (IST)");
+  // const [timeZone, setTimeZone] = useState("Asia/Kolkata (IST)");
   const [theme, setTheme] = useState("Light");
   const [fontSize, setFontSize] = useState("Small");
 
