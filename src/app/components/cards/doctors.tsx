@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Doctor } from "@/interfaces/interface";
 import Doctorcard from "../ui/doctorcard";
 import LoadingSpinner from "../ui/spinner";
-import { getDoctors } from "@/functions/getDoctors";
+import { getDoctors } from "../../../functions/getDoctors";
 
 const DoctorList = () => {
   const [doctors, setDoctors] = useState<Doctor[]>([
@@ -63,7 +63,7 @@ const DoctorList = () => {
         </div>
         <Link
           className="bg-blue-500 text-white hover:bg-blue-600 rounded-md p-1 font-semibold text-center"
-          href={"/doctors"}
+          href={"/adddoctors"}
         >
           Add Doctor
         </Link>

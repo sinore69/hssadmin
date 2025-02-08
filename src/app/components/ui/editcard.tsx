@@ -18,7 +18,7 @@ const EditableDoctorCard: React.FC<{
     };
 
   const handleSave = async () => {
-    console.log("Edited Doctor Data:", editableDoctor);
+    // console.log("Edited Doctor Data:", editableDoctor);
     setSpinner(true);
     await editDoctor(doctor, editableDoctor);
     setSpinner(false);

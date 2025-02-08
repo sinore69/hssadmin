@@ -25,7 +25,7 @@ function Referral() {
       const result = await response.json();
       const processedData = parseDoctors(result);
       setDoctor(processedData);
-      console.log(processedData);
+      // console.log(processedData);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
