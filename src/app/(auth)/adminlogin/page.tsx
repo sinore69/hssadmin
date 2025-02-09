@@ -1,29 +1,40 @@
 "use client";
-
 import { isAdminLoggedIn } from "@/functions/adminauth";
-import React from "react";
 import { useRouter } from "next/navigation";
+import React, { useState } from "react";
 
 export default function AdminLogin() {
   const router = useRouter();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [feedback, setFeedback] = useState<string | null>(null);
+
   function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
     async function authCheck() {
-      const res = await isAdminLoggedIn();
-      if (res) {
+      const res = await isAdminLoggedIn(email, password);
+      if (res.success) {
         localStorage.setItem("isAdminLoggedin", "true");
         router.push("/admin");
+      } else {
+        setFeedback(res.message);
       }
     }
     authCheck();
   }
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-50">
       <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-lg">
         <h2 className="text-2xl font-bold text-center text-blue-600 mb-8">
           Admin Login
         </h2>
-        <form className="space-y-4" onSubmit={(e) => handleSubmit(e)}>
+        {feedback && (
+          <div className="mb-4 text-center text-red-600 font-medium animate-shake">
+            {feedback}
+          </div>
+        )}
+        <form className="space-y-4" onSubmit={handleSubmit}>
           <div>
             <label className="block text-sm font-medium text-gray-700">
               Email
@@ -31,7 +42,10 @@ export default function AdminLogin() {
             <input
               type="email"
               placeholder="Enter your email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               className="w-full mt-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              required
             />
           </div>
           <div>
@@ -41,7 +55,10 @@ export default function AdminLogin() {
             <input
               type="password"
               placeholder="Enter your password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               className="w-full mt-1 px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              required
             />
           </div>
           <button

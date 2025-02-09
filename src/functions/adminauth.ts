@@ -2,21 +2,37 @@
 
 import prisma from "@/lib/prisma";
 
-export async function isAdminLoggedIn(): Promise<boolean> {
-  const res: {
-    hospitalid: number;
-    hospitalname: string;
-    hospitalemail: string;
-    password: string;
-  } | null = await prisma.hospital.findFirst({
+interface AdminAuthResponse {
+  success: boolean;
+  message: string;
+}
+
+export async function isAdminLoggedIn(
+  email: string,
+  password: string
+): Promise<AdminAuthResponse> {
+  const res = await prisma.hospital.findFirst({
     where: {
-      hospitalid: 1,
+      hospitalemail: email,
     },
   });
-  if (res?.password === "default") {
-    // console.log("true");
-    return true;
+
+  if (!res) {
+    return {
+      success: false,
+      message: "Email not found. Please check and try again.",
+    };
   }
-//   console.log("false");
-  return false;
+
+  if (res.password !== password) {
+    return {
+      success: false,
+      message: "Incorrect password. Please try again.",
+    };
+  }
+
+  return {
+    success: true,
+    message: "Login successful.",
+  };
 }

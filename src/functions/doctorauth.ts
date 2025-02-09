@@ -2,25 +2,23 @@
 
 import prisma from "@/lib/prisma";
 
-export async function isDoctorLoggedIn(): Promise<boolean> {
-  const res: {
-    contactNumber: string;
-    name: string;
-    email: string;
-    specialization: string;
-    yoe: number;
-    schedule: string;
-    password: string;
-  } | null = await prisma.doctors.findFirst({
+export async function isDoctorLoggedIn(
+  email: string,
+  password: string
+): Promise<{ success: boolean; message: string }> {
+  const doctor = await prisma.doctors.findFirst({
     where: {
-      contactNumber: "01",
-      email:"a@gmail.com"
+      email: email,
     },
   });
-  if (res?.password === "default") {
-    console.log("true");
-    return true;
+
+  if (!doctor) {
+    return { success: false, message: "Email not found" };
   }
-    console.log("false");
-  return false;
+
+  if (doctor.password !== password) {
+    return { success: false, message: "Incorrect password" };
+  }
+
+  return { success: true, message: "Login successful" };
 }
