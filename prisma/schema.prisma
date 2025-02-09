@@ -11,8 +11,16 @@ datasource db {
 model doctors {
   name           String
   contactNumber  String @id @unique
-  email          String
+  email          String @unique
   specialization String
   yoe            Int
   schedule       String
+  password       String
+}
+
+model hospital {
+  hospitalid    Int    @id @unique @default(autoincrement())
+  hospitalname  String
+  hospitalemail String @unique
+  password      String
 }

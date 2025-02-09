@@ -10,6 +10,7 @@ export async function addNewDoctor(formData: Doctor) {
       specialization: formData.specialization,
       yoe: parseInt(formData.yoe),
       schedule: formData.schedule,
+      password:"default"
     },
   });
   console.log(res);

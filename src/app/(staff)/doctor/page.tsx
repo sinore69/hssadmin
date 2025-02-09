@@ -1,8 +1,38 @@
 "use client";
 import Referral from "@/app/components/cards/referral";
-import { FaCalendarAlt} from "react-icons/fa";
+import LoadingSpinner from "@/app/components/ui/spinner";
+import { useRouter } from "next/navigation";
+import { useState, useEffect } from "react";
+import { FaCalendarAlt } from "react-icons/fa";
 
 export default function DoctorDashboard() {
+  const router = useRouter();
+  const [isChecking, setIsChecking] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false); // Replace this with your actual login state logic
+
+  useEffect(() => {
+    const checkLogin = async () => {
+      // Simulate login check (replace this with real logic)
+      const loggedIn = localStorage.getItem("isDoctorLoggedIn");
+      if (loggedIn === null || loggedIn === "false") {
+        router.push("/doctorlogin");
+      } else {
+        setIsLoggedIn(true);
+      }
+      setIsChecking(false);
+    };
+
+    checkLogin();
+  }, [router]);
+
+  if (isChecking) {
+    return <LoadingSpinner />; // Optional loading indicator
+  }
+
+  if (!isLoggedIn) {
+    return null; // Prevent rendering until redirection completes
+  }
+
   return (
     <div className="min-h-screen bg-gray-100 p-8 rounded-lg">
       <h1 className="text-3xl font-bold text-gray-800 mb-6">
