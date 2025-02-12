@@ -6,7 +6,7 @@ const Sidebar = () => {
   return (
     <div className="md:w-48 lg:w-64 h-screen bg-white shadow-md flex flex-col absolute">
       {/* Logo */}
-      <div className="p-4 text-2xl font-bold text-center border-b">Dashboard</div>
+      <div className="p-4 text-2xl font-bold text-center border-b text-black">Logo</div>
 
       {/* Navigation Links */}
       <nav className="flex-1 p-4 space-y-4">

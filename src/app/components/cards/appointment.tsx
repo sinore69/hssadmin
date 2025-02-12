@@ -42,7 +42,7 @@ interface Hospital {
   };
 }
 
-const AppointmentsCard: React.FC = () => {
+export default function AppointmentCard() {
   const [hospital, setHospital] = useState<Hospital["hospital"]>();
 
   const appointmentsList = hospital?.Departments?.flatMap((department) =>
@@ -129,6 +129,4 @@ const AppointmentsCard: React.FC = () => {
       </div>
     </div>
   );
-};
-
-export default AppointmentsCard;
+}

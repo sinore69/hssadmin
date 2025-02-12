@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import DoctorList from "../../components/cards/doctors";
-import Appointments from "../../components/cards/appointment";
+import AppointmentCard from "../../components/cards/appointment";
 import Payments from "../../components/cards/payments";
 import General from "../../components/cards/general";
 import LoadingSpinner from "@/app/components/ui/spinner";
@@ -36,11 +36,11 @@ export default function AdminLogin() {
   }
 
   return (
-    <div className="flex flex-col gap-y-2">
-      <DoctorList />
-      <Appointments />
-      <Payments />
-      <General />
-    </div>
+      <div className="flex flex-col gap-y-2">
+        <DoctorList />
+        <AppointmentCard />
+        <Payments />
+        <General />
+      </div>
   );
 }
