@@ -1,5 +1,5 @@
 "use client";
-import { isAdminLoggedIn } from "@/functions/adminauth";
+import { isAdminLoggedIn } from "functions/adminauth";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 

@@ -1,8 +1,8 @@
 "use client";
 import { useState } from "react";
 import { Button } from "../../components/ui/button";
-import { Doctor } from "@/interfaces/interface";
-import { addNewDoctor } from "@/functions/addnewdoctor";
+import { Doctor } from "interfaces/interface";
+import { addNewDoctor } from "functions/addnewdoctor";
 import { useRouter } from "next/navigation";
 export default function DoctorManagement() {
   const [formData, setFormData] = useState<Doctor>({

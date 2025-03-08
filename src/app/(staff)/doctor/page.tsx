@@ -1,6 +1,6 @@
 "use client";
-import Referral from "@/app/components/cards/referral";
-import LoadingSpinner from "@/app/components/ui/spinner";
+import Referral from "app/components/cards/referral";
+import LoadingSpinner from "app/components/ui/spinner";
 import { useRouter } from "next/navigation";
 import { useState, useEffect } from "react";
 import { FaCalendarAlt } from "react-icons/fa";

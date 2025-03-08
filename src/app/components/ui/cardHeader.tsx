@@ -1,4 +1,4 @@
-import { Doctor } from "@/interfaces/interface";
+import { Doctor } from "interfaces/interface";
 export const CardHeader: React.FC<{
   name: string;
   specialization: string;

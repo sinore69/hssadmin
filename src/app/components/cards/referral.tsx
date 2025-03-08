@@ -1,5 +1,5 @@
 "use client";
-import { parseDoctors } from "@/functions/parser/doctorlist";
+import { parseDoctors } from "functions/parser/doctorlist";
 import React, { FormEvent, useState, ChangeEvent, useEffect } from "react";
 import { FaUserPlus } from "react-icons/fa";
 

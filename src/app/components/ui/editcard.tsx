@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Doctor } from "@/interfaces/interface";
+import { Doctor } from "interfaces/interface";
 import { CardHeader } from "./cardHeader";
-import { editDoctor } from "@/functions/editDoctor";
+import { editDoctor } from "functions/editDoctor";
 import SmallSpinner from "./smallSpinner";
 const EditableDoctorCard: React.FC<{
   doctor: Doctor;

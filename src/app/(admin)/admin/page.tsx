@@ -5,7 +5,7 @@ import DoctorList from "../../components/cards/doctors";
 import AppointmentCard from "../../components/cards/appointment";
 import Payments from "../../components/cards/payments";
 import General from "../../components/cards/general";
-import LoadingSpinner from "@/app/components/ui/spinner";
+import LoadingSpinner from "app/components/ui/spinner";
 
 export default function AdminLogin() {
   const router = useRouter();

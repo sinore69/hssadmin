@@ -1,6 +1,6 @@
 "use client";
-import { deleteDoctor } from "@/functions/deleteDoctor";
-import { Doctor } from "@/interfaces/interface";
+import { deleteDoctor } from "functions/deleteDoctor";
+import { Doctor } from "interfaces/interface";
 import { FaTrash } from "react-icons/fa";
   
 const DeleteIcon = (props: { data: Doctor }) => {

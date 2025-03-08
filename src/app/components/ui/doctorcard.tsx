@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Button } from "./button";
 import { Card, CardContent } from "./card";
-import { Doctor } from "@/interfaces/interface";
+import { Doctor } from "interfaces/interface";
 import DeleteIcon from "./delete";
 import Editcard from "./editcard";
 

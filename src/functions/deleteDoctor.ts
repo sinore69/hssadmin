@@ -1,6 +1,6 @@
 "use server";
-import { Doctor } from "@/interfaces/interface";
-import prisma from "@/lib/prisma";
+import { Doctor } from "interfaces/interface";
+import prisma from "lib/prisma";
 
 export async function deleteDoctor(data: Doctor) {
   await prisma.doctors
