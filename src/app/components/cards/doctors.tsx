@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Doctor } from "@/interfaces/interface";
 import Doctorcard from "../ui/doctorcard";
 import LoadingSpinner from "../ui/spinner";
-import { getDoctors } from "../../../functions/getDoctors";
+import { getDoctors } from "@/functions/getDoctors";
 
 const DoctorList = () => {
   const [doctors, setDoctors] = useState<Doctor[]>([
