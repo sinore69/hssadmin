@@ -6,7 +6,7 @@ import Link from "next/link";
 import { Doctor } from "interfaces/interface";
 import Doctorcard from "../ui/doctorcard";
 import LoadingSpinner from "../ui/spinner";
-import { getDoctors } from "../../../functions/getDoctors";
+import { getDoctorsList } from "functions/getDoctorsList";
 
 const DoctorList = () => {
   const [doctors, setDoctors] = useState<Doctor[]>([
@@ -32,7 +32,7 @@ const DoctorList = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response: Doctor[] = await getDoctors();
+        const response: Doctor[] = await getDoctorsList();
         if (!response) {
           throw new Error("Network response was not ok");
         }
